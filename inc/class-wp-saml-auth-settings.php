@@ -448,7 +448,21 @@ class WP_SAML_Auth_Settings {
 				'label'   => 'last_name',
 				'type'    => 'text',
 				'default' => 'last_name',
-			),
+            ),
+            array(
+                'section' => 'attributes',
+                'uid'     => 'group_attribute',
+                'label'   => 'group',
+                'type'    => 'text',
+                'default' => 'group',
+            ),
+            array(
+                'section' => 'attributes',
+                'uid'     => 'admin_attribute',
+                'label'   => 'admin_group_name',
+                'type'    => 'text',
+                'default' => 'administrator',
+            )
 		);
 	}
 
