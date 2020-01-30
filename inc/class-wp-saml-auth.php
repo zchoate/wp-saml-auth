@@ -336,13 +336,25 @@ class WP_SAML_Auth {
 		if ( ! self::get_option( 'auto_provision' ) ) {
 			return new WP_Error( 'wp_saml_auth_auto_provision_disabled', esc_html__( 'No WordPress user exists for your account. Please contact your administrator.', 'wp-saml-auth' ) );
 		}
-
+        /**
+         * Added logic in for group assignment
+         */
+        $admin_group_name = self::get_option('admin_attribute');
+		$group_attribute = self::get_option("group_attribute");
+		if(in_array($admin_group_name, $attributes[$group_attribute])) {
+			$default_role = 'administrator';
+		} else {
+			$default_role = 'subscriber';
+        }
+        /**
+         * Create user based on SAML attributes.
+         */
 		$user_args = array();
 		foreach ( array( 'display_name', 'user_login', 'user_email', 'first_name', 'last_name' ) as $type ) {
 			$attribute          = self::get_option( "{$type}_attribute" );
 			$user_args[ $type ] = ! empty( $attributes[ $attribute ][0] ) ? $attributes[ $attribute ][0] : '';
 		}
-		$user_args['role']      = self::get_option( 'default_role' );
+		$user_args['role']      = $default_role;
 		$user_args['user_pass'] = wp_generate_password();
 		/**
 		 * Runs before a user is created based off a SAML response.
