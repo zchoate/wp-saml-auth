@@ -152,7 +152,19 @@ function wpsa_filter_option( $value, $option_name ) {
 		 *
 		 * @param string
 		 */
-		'default_role'           => get_option( 'default_role' ),
+        'default_role'           => get_option( 'default_role' ),
+        /**
+		 * SAML attribute for user's groups
+		 *
+		 * @param string
+		 */
+        'group_attribute'        => 'group',
+        /**
+		 * Default SAML group name for administrators
+		 *
+		 * @param string
+		 */
+        'admin_attribute'        => 'administrator'
 	);
 	$value = isset( $defaults[ $option_name ] ) ? $defaults[ $option_name ] : $value;
 	return $value;
