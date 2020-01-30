@@ -155,7 +155,8 @@ class WP_SAML_Auth_Options {
 			'user_email_attribute',
 			'display_name_attribute',
 			'first_name_attribute',
-			'last_name_attribute',
+            'last_name_attribute',
+            'group_attribute',
 		);
 		foreach ( $remaining_settings as $setting ) {
 			$settings[ $setting ] = $options[ $setting ];
